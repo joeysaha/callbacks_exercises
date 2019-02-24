@@ -143,13 +143,14 @@ console.log( 'The total number of transactions is: ', totalTransactions );
 
 let numSales = 0;
 
-// transactionMethod(transactions, 'type', 'sale', numSales);
-transactions.forEach((transaction)=>{
-  if (transaction.type === 'sale') {
-    numSales++;
-  }
-});
+// transactions.forEach((transaction)=>{
+//   if (transaction.type === 'sale') {
+//     numSales++;
+//   }
+// });
+// // This works^
 
+numSales = transactions.filter((transaction) => transaction.type === 'sale').length;
 
 /*
   Hey, welcome to the first question!
@@ -181,11 +182,13 @@ console.log( 'The total number of sales is:', numSales );
 */
 let numPurchases = 0;
 
-transactions.forEach((transaction)=>{
-  if (transaction.type === 'purchase') {
-    numPurchases++;
-  }
-});
+// transactions.forEach((transaction)=>{
+//   if (transaction.type === 'purchase') {
+//     numPurchases++;
+//   }
+// });
+// // this works
+numPurchases = transactions.filter((transaction)=>transaction.type === 'purchase').length;
 
 console.log( 'The total number of purchases is:', numPurchases );
 
@@ -200,11 +203,13 @@ console.log( 'The total number of purchases is:', numPurchases );
   - Don't forget that 'purchases' can also be made in 'cash'!
 */
 let numCashSales = 0;
-transactions.forEach((transaction)=>{
-  if (transaction.type === 'sale' && transaction.paymentMethod === 'cash') {
-    numCashSales++;
-  }
-});
+// transactions.forEach((transaction)=>{
+//   if (transaction.type === 'sale' && transaction.paymentMethod === 'cash') {
+//     numCashSales++;
+//   }
+// });
+// // this works
+numCashSales = transactions.filter((transaction)=> transaction.type === 'sale' && transaction.paymentMethod === 'cash').length;
 console.log( 'The total number of cash sales is:', numCashSales );
 
 
@@ -218,11 +223,13 @@ console.log( 'The total number of cash sales is:', numCashSales );
   - Make sure to exclude any 'sales' made by 'credit'!
 */
 let numCreditPurchases = 0;
-transactions.forEach((transaction)=>{
-  if (transaction.type === 'purchase' && transaction.paymentMethod === 'credit') {
-    numCreditPurchases++;
-  }
-});
+// transactions.forEach((transaction)=>{
+//   if (transaction.type === 'purchase' && transaction.paymentMethod === 'credit') {
+//     numCreditPurchases++;
+//   }
+// });
+// // this works
+numCreditPurchases = transactions.filter((transaction)=>transaction.type === 'purchase' && transaction.paymentMethod === 'credit').length;
 console.log( 'The total number of credit purchases is:', numCreditPurchases );
 
 
@@ -298,9 +305,10 @@ transactions.forEach((transaction)=>{
     bigSpenders.push({name: `${transaction.customer}`, numItems: `${transaction.items.length}`, paymentMethod: `${transaction.paymentMethod}`});
   }
 });
-
-console.log( 'The "big spenders" are:', bigSpenders );
-
+// this works
+// bigSpenders.push(transactions.filter((transaction)=>transaction.items.length >= 5 && transaction.type === 'sale'));
+// console.log( 'The "big spenders" are:', bigSpenders );
+// // this works
 
 // --------------------------------------------------
 // QUESTION 08
@@ -335,9 +343,10 @@ console.log( 'The sum of the first sale items is:', sumFirstSale );
 let sumPurchases = 0;
 transactions.forEach((transaction)=>{
   if (transaction.type === 'purchase') {
-    for (let i = 0; i < transaction.items.length; i++) {
-      sumPurchases += transaction.items[i].price;
-    }
+    // for (let i = 0; i < transaction.items.length; i++) {
+    //   sumPurchases += transaction.items[i].price;
+    // }
+    transaction.items.forEach((itemPrice) => sumPurchases += itemPrice.price);
   }
 });
 console.log( 'The sum of all purchases is:', sumPurchases );
@@ -358,9 +367,10 @@ console.log( 'The sum of all purchases is:', sumPurchases );
 */
 let netProfit = 0;
 transactions.forEach((transaction)=>{
-  for (let i = 0; i < transaction.items.length; i++) {
-    netProfit += transaction.items[i].price;
-  }
+  // for (let i = 0; i < transaction.items.length; i++) {
+  //   netProfit += transaction.items[i].price;
+  // }
+  transaction.items.forEach((itemPrice)=> netProfit += itemPrice.price);
 });
 console.log( 'The net profit is:', netProfit );
 
